@@ -15,7 +15,6 @@ steps:
     awsCredentials: 'ConnectToAWS'
     regionName: 'us-east-1'
     bucketName: 'my-bucket-709-awsdevops'
-    sourceFolder: 'cf'
     globExpressions: '**'
     targetFolder: 'AWSCommunityBuilders'
     createBucket: true
