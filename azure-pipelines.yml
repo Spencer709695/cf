@@ -12,7 +12,7 @@ pool:
 steps:
 - task: S3Upload@1
   inputs:
-    awsCredentials: 'AWS'
+    awsCredentials: 'ConnectToAWS'
     regionName: 'us-east-1'
     bucketName: 'my-bucket-709-awsdevops'
     sourceFolder: 'source'
