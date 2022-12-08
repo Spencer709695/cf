@@ -4,14 +4,30 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+- master
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: S3Upload@1
+  inputs:
+    awsCredentials: 'AWS'
+    regionName: 'us-east-1'
+    bucketName: 'my-bucket-709-awsdevops'
+    sourceFolder: 'source'
+    globExpressions: '**'
+    targetFolder: 'AWSCommunityBuilders'
+    createBucket: true
+
+- task: CloudFormationCreateOrUpdateStack@1
+  inputs:
+    awsCredentials: 'ConnectToAWS'
+    regionName: 'us-east-1'
+    stackName: 'AzureDevOpsDemo'
+    templateSource: 's3'
+    s3BucketName: 'my-bucket-709-awsdevops'
+    s3ObjectKey: 'AWSCommunityBuilders/it_dodhmcdj_02_enus_06_AWS_WebSrv.yaml'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
